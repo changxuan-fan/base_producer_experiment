@@ -54,7 +54,23 @@ import {
       console.log("Saved amountOfWarrant to player.round object: ", amountOfWarrant);
     }
   
+    function generateLeaderBoard() {
+      // Assuming 'players' is an array of player objects with a 'get' method
+      const playerScores = players.map(player => player.get("score") || 0);
   
+      // Sorting the scores in descending order
+      const sortedScores = playerScores.sort((a, b) => b - a);
+  
+      // Generating the table content
+      const tableContent = sortedScores.map((score, index) => (
+        <tr key={index} className="border-b">
+          <td className="py-2">Player {index + 1}</td>
+          <td className="py-2">{score}</td>
+        </tr>
+      ));
+  
+      return tableContent;
+    }
 
     return (
       <div className="md:min-w-96 lg:min-w-128 xl:min-w-192 flex flex-col items-center space-y-10">
@@ -105,9 +121,20 @@ import {
               <WarrantButton text={'$100'} on_button_click={(e) => handleWarrantChoice(e, 100)}></WarrantButton>
           </div>
 
-
-
           <ProfitMarginCalculation producerPlayer = {player}/>
+
+          <div className="max-w-lg mx-auto my-8 p-4 bg-white rounded-lg shadow-lg">
+            <h2 className="text-2xl font-semibold mb-4">Leaderboard</h2>
+            <table className="w-full">
+              <thead>
+                <tr>
+                  <th className="py-2">Player</th>
+                  <th className="py-2">Score</th>
+                </tr>
+              </thead>
+              <tbody>{generateLeaderBoard()}</tbody>
+            </table>
+          </div>
 
           <br/><br/>
             <NextRoundButton on_button_click={(e) => handleSubmit(e)}/>
