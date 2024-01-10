@@ -12,8 +12,15 @@ treatments:
   - desc: "Single-player Game"
     factors:
       playerCount: 1
+      chatEnabled: false
     name: Solo
   - desc: "Two-player Game"
     factors:
       playerCount: 2
-    name: Two Players
+      chatEnabled: false
+    name: Three Players
+  - desc: "Two-player Game"
+    factors:
+      playerCount: 3
+      chatEnabled: false
+    name: Three Players

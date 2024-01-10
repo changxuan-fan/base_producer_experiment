@@ -6,7 +6,7 @@ import { Stage } from "./Stage";
 
 export function Game() {
   const game = useGame();
-  const { playerCount } = game.get("treatment");
+  const { chatEnabled } = game.get("treatment");
 
   return (
     <div className="h-full w-full flex">
@@ -17,7 +17,7 @@ export function Game() {
         </div>
       </div>
 
-      {playerCount > 1 && (
+      {chatEnabled && (
         <div className="h-full w-128 border-l flex justify-center items-center">
           <Chat scope={game} attribute="chat" />
         </div>

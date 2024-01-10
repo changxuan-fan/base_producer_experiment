@@ -75,7 +75,7 @@ import {
     return (
       <div className="md:min-w-96 lg:min-w-128 xl:min-w-192 flex flex-col items-center space-y-10">
         {}
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         <div>
         <h1><b>You are a producer of toothpaste.</b> </h1>
         <h1>You will now decide what to produce, how to advertise it and the price.</h1>
@@ -117,8 +117,8 @@ import {
 
           <p>Your current choice of warrant is <b>$ {player.round.get("amountOfWarrant") || 0} </b></p>
           <div className="flex justify-center space-x-4"> 
-              <WarrantButton text={'$20'} on_button_click={(e) => handleWarrantChoice(e, 20)}></WarrantButton>
-              <WarrantButton text={'$100'} on_button_click={(e) => handleWarrantChoice(e, 100)}></WarrantButton>
+              {player.get("score") > 20 && <WarrantButton text={'$20'} on_button_click={(e) => handleWarrantChoice(e, 20)}></WarrantButton>}
+              {player.get("score") > 100 && <WarrantButton text={'$100'} on_button_click={(e) => handleWarrantChoice(e, 100)}></WarrantButton>}
           </div>
 
           <ProfitMarginCalculation producerPlayer = {player}/>
