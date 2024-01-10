@@ -18,8 +18,8 @@ treatments:
     factors:
       playerCount: 2
       chatEnabled: false
-    name: Three Players
-  - desc: "Two-player Game"
+    name: Two Players
+  - desc: "Three-player Game"
     factors:
       playerCount: 3
       chatEnabled: false
