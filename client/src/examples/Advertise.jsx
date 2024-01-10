@@ -25,7 +25,8 @@ import {
       [player.round.get("productionQuality"),
       player.round.get("advertisementQuality"),
       player.round.get("priceOfProduct"),
-      player.round.get("productionCost")])
+      player.round.get("productionCost"), 
+      player.round.get("amountOfWarrant"), ])
 
       player.stage.set("submit", true);//player.stage.submit();
     }
@@ -46,6 +47,11 @@ import {
     function handlePriceChoice(e, priceOfProduct) {
       player.round.set("priceOfProduct", priceOfProduct);
       console.log("Saved priceOfProduct to player.round object: ", priceOfProduct);
+    }
+
+    function handleWarrantChoice(e, amountOfWarrant) {
+      player.round.set("amountOfWarrant", amountOfWarrant);
+      console.log("Saved amountOfWarrant to player.round object: ", amountOfWarrant);
     }
   
     const isResultStage = stage.get("name") === "result";
@@ -119,6 +125,18 @@ import {
           <PriceButton text={'$10'} on_button_click={(e) => handlePriceChoice(e, 10)}></PriceButton>
           <PriceButton text={'$15'} on_button_click={(e) => handlePriceChoice(e, 15)}></PriceButton>
           </div>
+
+          <h1><b>Choose the amount of warrant you want for the product</b></h1>
+
+          <p>Your current choice of warrant is <b>$ {player.round.get("amountOfWarrant") || 0} </b></p>
+          <div className="flex justify-center space-x-4"> 
+              <WarrantButton text={'$50'} on_button_click={(e) => handleWarrantChoice(e, 50)}></WarrantButton>
+   
+              <WarrantButton text={'$300'} on_button_click={(e) => handleWarrantChoice(e, 300)}></WarrantButton>
+          </div>
+
+
+
           <ProfitMarginCalculation producerPlayer = {player}/>
 
           <br/><br/>
@@ -192,6 +210,14 @@ import {
     )
   }
 
+  function WarrantButton({text, on_button_click}){
+    return(
+      <Button handleClick={on_button_click} >
+          🏷️ Warrant is {text}
+            </Button>
+    )
+  }
+
   function PlayerScore(player, onChange, isResultStage) {
     return (
       <div key={player.id} className="py-4">
@@ -217,12 +243,12 @@ import {
 
 
   function ProfitMarginCalculation({producerPlayer}){
-    let profit = producerPlayer.round.get("priceOfProduct") - producerPlayer.round.get("productionCost")
+    let profit = producerPlayer.round.get("priceOfProduct") - producerPlayer.round.get("productionCost") 
     return(
       <div>
         
-        <p>You have chosen to produce <b>{producerPlayer.round.get("productionQuality")}</b> quality toothpaste and advertise it as <b>{producerPlayer.round.get("advertisementQuality")}</b> quality toothpase at a <b>price of ${producerPlayer.round.get("priceOfProduct")}</b>.</p>
-        <h1><p>This gives a <b>profit of  ${profit}</b> per product sold.</p></h1>
+        <p>You have chosen to produce <b>{producerPlayer.round.get("productionQuality")}</b> quality toothpaste and advertise it as <b>{producerPlayer.round.get("advertisementQuality")}</b> quality toothpase at a <b>price of ${producerPlayer.round.get("priceOfProduct")}</b> with a <b>warrant of ${producerPlayer.round.get("amountOfWarrant")}</b>.</p>
+        <h1><p>This gives a <b>profit of  ${profit}</b> per product sold and a deduction of $ {producerPlayer.round.get("amountOfWarrant")} for warrant.</p></h1>
 
       </div>
     )

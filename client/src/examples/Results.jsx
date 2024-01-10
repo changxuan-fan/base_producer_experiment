@@ -13,6 +13,7 @@ export function SalesResults({roundNumber}) {
   const advertisementQuality = player.get(roundNumberText.concat("_choices"))[1]
   const priceOfProduct = player.get(roundNumberText.concat("_choices"))[2]
   const productionCost = player.get(roundNumberText.concat("_choices"))[3]
+  const amountOfWarrant = player.get(roundNumberText.concat("_choices"))[4]
   let imageUrl = "";
   //console.log('roundNumberText', roundNumberText)
   if (advertisementQuality === "high") {
@@ -39,7 +40,7 @@ export function SalesResults({roundNumber}) {
   const numBuyers = Math.floor((Math.random() * (max - min ) + min)) ;
 
 
-  const salesCount = numBuyers * (priceOfProduct - productionCost);
+  const salesCount = numBuyers * (priceOfProduct - productionCost) - amountOfWarrant;
   const finalScore = currentScore + salesCount
 
   function handleSubmit() {
@@ -60,7 +61,7 @@ export function SalesResults({roundNumber}) {
         </p>
         <p>
           You chose to advertise it as a <b>{advertisementQuality}</b> quality product.
-        You sold it at a price of <b>${priceOfProduct}</b>.
+        You sold it at a price of <b>${priceOfProduct}</b>. Your warrant is at <b>${amountOfWarrant || 0}</b>
         <br /> <br />
         </p>
 
@@ -71,7 +72,7 @@ export function SalesResults({roundNumber}) {
           It was advertised to an audience of 100 users, and {numBuyers} users bought your product.
         </p>
         <p> 
-          You earned ${priceOfProduct - productionCost}  per product x {numBuyers} units sold = {salesCount} points in sales.
+          You earned ${priceOfProduct - productionCost}  per product x {numBuyers} units sold - {amountOfWarrant || 0} warrant = {salesCount} points in sales.
         </p><br/>
         <p> Your score for this round is: {salesCount} </p>
         <p> Your total score is: {salesCount + currentScore} </p><br/>
